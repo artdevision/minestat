@@ -7,13 +7,13 @@ services:
       args:
         - PHP_UPSTREAM_CONTAINER=${NGINX_PHP_UPSTREAM_CONTAINER}
         - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
-#    ports:
-#      - "80:80"
-#      - "443:443"
+    ports:
+      - "80:80"
+      - "443:443"
     expose:
       - "9001"
-    environment:
-      - VIRTUAL_HOST=${VIRTUAL_HOST}
+#    environment:
+#      - VIRTUAL_HOST=${VIRTUAL_HOST}
     volumes:
       - ./../:/var/www/html
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
@@ -45,7 +45,7 @@ services:
     networks:
       - srv_local
     depends_on:
-      - nginx_srv
+#      - nginx_srv
       - php_srv
 
   redis_srv:
@@ -75,6 +75,6 @@ services:
 
 networks:
   srv_local:
-  nginx-proxy:
-    external:
-      name: nginx_proxy_nginx-proxy
+#  nginx-proxy:
+#    external:
+#      name: nginx_proxy_nginx-proxy

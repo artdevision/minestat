@@ -2,10 +2,13 @@
     <thead>
         <tr>
             <th>On</th>
-            <th>Kernel</th>
+
             <th>Name</th>
             <th>Loc</th>
             <th>IP</th>
+            <th>Driver</th>
+            <th>Kernel</th>
+
             <th>CPU t</th>
             <th>Up Time</th>
             <th>Free Space</th>
@@ -19,10 +22,11 @@
     @foreach($rigs as $rig)
         <tr>
             <td><i class="fa fa-fw fa-power-off {!! $rig->state->off ? 'text-red' : 'text-green' !!}"></i></td>
-            <td>{!! $rig->kernel !!}</td>
             <td>{!! $rig->hostname !!}</td>
             <td>{!! $rig->rack_loc !!}</td>
             <td>{!! $rig->ip !!}</td>
+            <td>{!! $rig->driver !!}</td>
+            <td>{!! $rig->kernel !!}</td>
             <td>{!! $rig->state->cpu_temp !!}</td>
             <td>{!! $rig->state->uptime !!}</td>
             <td>{!! $rig->state->freespace !!}</td>
