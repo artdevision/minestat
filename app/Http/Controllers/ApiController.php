@@ -30,7 +30,7 @@ class ApiController extends Controller
         }
 
         /** @var Rig $rig */
-        $rig = Rig::updateOrCreate(['uuid' => $data['uuid']], $data);
+        $rig = Rig::updateOrCreate(['hostname' => $data['hostname']], $data);
 
         $data['uuid'] = $rig->getKey();
 
