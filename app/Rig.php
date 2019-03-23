@@ -62,7 +62,11 @@ class Rig extends BaseModel
 
     public function getOnlineAttribute()
     {
-        return boolval(Carbon::createFromTimeString($this->getStateAttribute()->updated_at)->diffInMinutes() < 4);
+        $state = $this->getStateAttribute();
+        if (empty($state)) {
+            return false;
+        }
+        return boolval(Carbon::createFromTimeString($state->updated_at)->diffInMinutes() < 4);
     }
 
     public function setGpusAttribute($value)
