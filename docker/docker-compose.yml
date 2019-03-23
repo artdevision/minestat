@@ -45,7 +45,7 @@ services:
     networks:
       - srv_local
     depends_on:
-#      - nginx_srv
+      - nginx_srv
       - php_srv
 
   redis_srv:
@@ -75,6 +75,6 @@ services:
 
 networks:
   srv_local:
-#  nginx-proxy:
-#    external:
-#      name: nginx_proxy_nginx-proxy
+  nginx-proxy:
+    external:
+      name: nginx_proxy_nginx-proxy
