@@ -21,6 +21,7 @@ Route::group(['middleware' => 'guest'], function() {
     Route::get('/', function() {
         return response()->json(['api' => 'v.1']);
     });
+    Route::get('pushstat', ['as' => 'procedure.apps', 'uses' => 'ApiController@pushStat']);
     Route::post('pushstat', ['as' => 'procedure.apps', 'uses' => 'ApiController@pushStat']);
 });
 
