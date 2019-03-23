@@ -1,0 +1,80 @@
+version: "3"
+
+services:
+  nginx_srv:
+    build:
+      context: ./nginx
+      args:
+        - PHP_UPSTREAM_CONTAINER=${NGINX_PHP_UPSTREAM_CONTAINER}
+        - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
+#    ports:
+#      - "80:80"
+#      - "443:443"
+    expose:
+      - "9001"
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+    volumes:
+      - ./../:/var/www/html
+      - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
+      - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
+    networks:
+      - srv_local
+      - nginx-proxy
+
+  php_srv:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+      args:
+        - X_DEBUG_REMOTE_HOST=${X_DEBUG_REMOTE_HOST}
+        - X_DEBUG_PROFILER_ENABLE=${X_DEBUG_PROFILER_ENABLE}
+        - USE_BLACKFIRE=${USE_BLACKFIRE}
+        - USE_HOST_ASSETS_BUILDER=${USE_HOST_ASSETS_BUILDER}
+    networks:
+      - srv_local
+    #command: ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+    volumes:
+      - ./../:/var/www/html
+      - ./../.cron:/etc/cron.d
+      - ./../.supervisor:/etc/supervisor/conf.d
+      - /etc/localtime:/etc/localtime:ro
+
+  memcached:
+    image: memcached
+    networks:
+      - srv_local
+    depends_on:
+      - nginx_srv
+      - php_srv
+
+  redis_srv:
+    image: redis:4.0.5-alpine
+    hostname: redis
+    networks:
+      - srv_local
+    volumes:
+      - './data/redis:/data'
+
+  mongodb_srv:
+    image: 'bitnami/mongodb:latest'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+      - MONGODB_USERNAME=${MONGODB_USER}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+    ports:
+      - "27017:27017"
+    networks:
+      - srv_local
+    volumes:
+      - './data/mongodb:/data/db'
+
+
+networks:
+  srv_local:
+  nginx-proxy:
+    external:
+      name: nginx_proxy_nginx-proxy
