@@ -21,16 +21,20 @@ class ApiController extends Controller
 
     public function pushStat(Request $request)
     {
+        $data = [];
         if(!empty($this->data)) {
             $data = $this->data;
             //return response()->json(['error' => 'content is no json']);
         }
         else {
-            $data = $request->all();
+            if($request->getMethod() == 'GET') {
+                $urlString = $request->get('url_style');
+                $data = json_decode($urlString, true);
+            }
         }
 
         /** @var Rig $rig */
-        $rig = Rig::updateOrCreate(['hostname' => $data['hostname']], $data);
+        $rig = Rig::updateOrCreate(['uuid' => $data['uuid']], $data);
 
         $data['uuid'] = $rig->getKey();
 
