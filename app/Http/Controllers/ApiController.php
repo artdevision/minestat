@@ -22,7 +22,7 @@ class ApiController extends Controller
     public function pushStat(Request $request)
     {
         if(!empty($this->data)) {
-            $data - $this->data;
+            $data = $this->data;
             //return response()->json(['error' => 'content is no json']);
         }
         else {
