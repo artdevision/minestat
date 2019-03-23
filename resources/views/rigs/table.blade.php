@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>On</th>
-
+            <th>V</th>
             <th>Name</th>
             <th>Loc</th>
             <th>IP</th>
@@ -11,9 +11,20 @@
             <th>Kernel</th>
 
             <th>CPU t</th>
-            <th>Up Time</th>
+            <th><a href="#"
+                   data-placement="right"
+                   data-tooltip="tooltip"
+                   data-toggle="tooltip"
+                   data-original-title="Rig UpTime" >b</a>
+            </th>
+            <th><a href="#"
+                   data-placement="right"
+                   data-tooltip="tooltip"
+                   data-toggle="tooltip"
+                   data-original-title="Miner Running Time" >m</a>
+            </th>
             <th>Free Space</th>
-            <th><a href="#" data-placement="bottom" data-tooltip="tooltip" data-toggle="tooltip" data-original-title="Total hashrate" >Hr</a></th>
+            <th><a href="#" data-placement="right" data-tooltip="tooltip" data-toggle="tooltip" data-original-title="Total hashrate" >Hr</a></th>
             <th>Hashes</th>
             <th>Temps</th>
             <th colspan="3">Action</th>
@@ -22,15 +33,27 @@
     <tbody>
     @foreach($rigs as $rig)
         <tr>
-            <td><i class="fa fa-fw fa-power-off {!! $rig->state->off ? 'text-red' : 'text-green' !!}"></i></td>
+            <td><i class="fa fa-fw fa-power-off {!! $rig->online ? 'text-green' : 'text-red' !!}"></i></td>
+            <td>{!! $rig->version !!}</td>
             <td>{!! $rig->hostname !!}</td>
             <td>{!! $rig->rack_loc !!}</td>
-            <td><a href="http://{!! $rig->ip !!}">{!! $rig->ip !!}</a></td>
-            <td>{!! $rig->miner !!}</td>
+            <td><a href="http://{!! $rig->ip !!}"
+                   data-placement="right"
+                   data-tooltip="tooltip"
+                   data-toggle="tooltip"
+                   data-original-title="{!! $rig->pool_info !!}">
+                    {!! $rig->ip !!}</a></td>
+            <td><a href="#"
+                   data-placement="right"
+                   data-tooltip="tooltip"
+                   data-toggle="tooltip"
+                   data-original-title="{!! $rig->miner !!}">
+                    {!! substr($rig->miner, 0, 2) !!}</a></td>
             <td>{!! $rig->driver !!}</td>
             <td>{!! $rig->kernel !!}</td>
             <td>{!! $rig->state->cpu_temp !!}</td>
-            <td>{!! $rig->state->uptime !!}</td>
+            <td>{!! $rig::timeForHuman($rig->state->uptime) !!}</td>
+            <td>{!! $rig::timeForHuman($rig->state->miner_secs) !!}</td>
             <td>{!! $rig->state->freespace !!}</td>
             <td>{!! $rig->state->hash !!}</td>
             <td>{!! is_array($rig->state->temp) ? implode('|',$rig->state->miner_hashes) : '' !!}</td>

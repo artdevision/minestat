@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Jenssegers\Mongodb\Eloquent\Model;
-
-class RigStat extends Model
+class RigStat extends BaseModel
 {
     /**
      * @var string

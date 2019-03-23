@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Jenssegers\Mongodb\Eloquent\Model;
+use Carbon\Carbon;
 
-class Rig extends Model
+class Rig extends BaseModel
 {
     protected $collection = 'rigs';
 
@@ -58,6 +58,11 @@ class Rig extends Model
                 ->first();
         }
         return $this->state;
+    }
+
+    public function getOnlineAttribute()
+    {
+        return boolval(Carbon::createFromTimeString($this->getStateAttribute()->updated_at)->diffInMinutes() < 4);
     }
 
     public function setGpusAttribute($value)
