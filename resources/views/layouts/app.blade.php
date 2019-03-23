@@ -30,7 +30,7 @@
     @yield('css')
 </head>
 
-<body class="skin-blue sidebar-mini">
+<body class="skin-blue sidebar-mini sidebar-collapse">
 @if (!Auth::guest())
     <div class="wrapper">
         <!-- Main Header -->
@@ -38,7 +38,7 @@
 
             <!-- Logo -->
             <a href="#" class="logo">
-                <b>InfyOm</b>
+                <b>Minestat</b>
             </a>
 
             <!-- Header Navbar -->

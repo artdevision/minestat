@@ -6,6 +6,7 @@
             <th>Name</th>
             <th>Loc</th>
             <th>IP</th>
+            <th>M</th>
             <th>Driver</th>
             <th>Kernel</th>
 
@@ -25,6 +26,7 @@
             <td>{!! $rig->hostname !!}</td>
             <td>{!! $rig->rack_loc !!}</td>
             <td><a href="http://{!! $rig->ip !!}">{!! $rig->ip !!}</a></td>
+            <td>{!! $rig->miner !!}</td>
             <td>{!! $rig->driver !!}</td>
             <td>{!! $rig->kernel !!}</td>
             <td>{!! $rig->state->cpu_temp !!}</td>
