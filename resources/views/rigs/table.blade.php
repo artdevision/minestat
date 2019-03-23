@@ -31,8 +31,8 @@
             <td>{!! $rig->state->uptime !!}</td>
             <td>{!! $rig->state->freespace !!}</td>
             <td>{!! $rig->state->hash !!}</td>
-            <td>{!! implode('|', $rig->state->miner_hashes) !!}</td>
-            <td>{!! implode('|', $rig->state->temp) !!}</td>
+            <td>{!! $rig->state->miner_hashes !!}</td>
+            <td>{!! $rig->state->temp !!}</td>
             <td>
                 {!! Form::open(['route' => ['rigs.destroy', $rig->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
