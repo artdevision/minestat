@@ -1,3 +1,4 @@
 .env
 /redis/*
 /mongodb/*
+/data/

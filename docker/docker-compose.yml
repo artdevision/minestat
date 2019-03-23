@@ -34,6 +34,7 @@ services:
         - USE_HOST_ASSETS_BUILDER=${USE_HOST_ASSETS_BUILDER}
     networks:
       - srv_local
+    restart: always
     #command: ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
     volumes:
       - ./../:/var/www/html
@@ -55,10 +56,11 @@ services:
     networks:
       - srv_local
     volumes:
-      - './data/redis:/data'
+      - ./data/redis:/data
 
   mongodb_srv:
     image: 'bitnami/mongodb:latest'
+    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
@@ -71,7 +73,7 @@ services:
     networks:
       - srv_local
     volumes:
-      - './data/mongodb:/data/db'
+      - ./data/mongodb:/bitnami
 
 
 networks:
