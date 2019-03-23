@@ -24,7 +24,7 @@
             <td><i class="fa fa-fw fa-power-off {!! $rig->state->off ? 'text-red' : 'text-green' !!}"></i></td>
             <td>{!! $rig->hostname !!}</td>
             <td>{!! $rig->rack_loc !!}</td>
-            <td>{!! $rig->ip !!}</td>
+            <td><a href="http://{!! $rig->ip !!}">{!! $rig->ip !!}</a></td>
             <td>{!! $rig->driver !!}</td>
             <td>{!! $rig->kernel !!}</td>
             <td>{!! $rig->state->cpu_temp !!}</td>
@@ -34,10 +34,12 @@
             <td>{!! is_array($rig->state->temp) ? implode('|',$rig->state->miner_hashes) : '' !!}</td>
             <td>{!! is_array($rig->state->temp) ? implode('|', $rig->state->temp) : '' !!}</td>
             <td>
-                {!! Form::open(['route' => ['rigs.destroy', $rig->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['cabinet.rigs.destroy', $rig->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
+                    {{--
                     <a href="{!! route('rigs.show', [$rig->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{!! route('rigs.edit', [$rig->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                    --}}
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                 </div>
                 {!! Form::close() !!}

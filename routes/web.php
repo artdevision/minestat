@@ -21,5 +21,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix'=>'cabinet', 'namespace' => 'Cabinet'], function() {
-    Route::get('/', ['as' => 'cabinet.personal', 'uses' => 'RigController@rigs']);
+    Route::get('/', ['as' => 'cabinet.rigs', 'uses' => 'RigController@rigs']);
+    Route::get('rig/destroy/{id}', ['as' => 'cabinet.rigs.destroy', 'uses' => 'RigController@destroy']);
 });
