@@ -32,7 +32,6 @@ services:
         - X_DEBUG_PROFILER_ENABLE=${X_DEBUG_PROFILER_ENABLE}
         - USE_BLACKFIRE=${USE_BLACKFIRE}
         - USE_HOST_ASSETS_BUILDER=${USE_HOST_ASSETS_BUILDER}
-    restart: always
     networks:
       - srv_local
     #command: ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
@@ -44,7 +43,6 @@ services:
 
   memcached:
     image: memcached
-    restart: always
     networks:
       - srv_local
     depends_on:
@@ -53,7 +51,6 @@ services:
 
   redis_srv:
     image: redis:4.0.5-alpine
-    restart: always
     hostname: redis
     networks:
       - srv_local
@@ -62,7 +59,6 @@ services:
 
   mongodb_srv:
     image: 'bitnami/mongodb:latest'
-    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
