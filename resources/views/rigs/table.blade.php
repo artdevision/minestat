@@ -31,7 +31,7 @@
             <td>{!! $rig->state->uptime !!}</td>
             <td>{!! $rig->state->freespace !!}</td>
             <td>{!! $rig->state->hash !!}</td>
-            <td>{!! is_array($rig->state->temp) ? implode('|',$rig->state->miner_hashes) | '' !!}</td>
+            <td>{!! is_array($rig->state->temp) ? implode('|',$rig->state->miner_hashes) : '' !!}</td>
             <td>{!! is_array($rig->state->temp) ? implode('|', $rig->state->temp) : '' !!}</td>
             <td>
                 {!! Form::open(['route' => ['rigs.destroy', $rig->id], 'method' => 'delete']) !!}
