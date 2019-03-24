@@ -40,7 +40,7 @@
                                 lineWidth: 2
                             },
                             points: {
-                                show: true
+                                show: false
                             }
                         },
                         xaxis: {
@@ -49,7 +49,7 @@
                             timeBase: "milliseconds"
                         },
                         zoom: {
-                            interactive: true
+                            interactive: false
                         },
                         grid: {
                             hoverable: true
