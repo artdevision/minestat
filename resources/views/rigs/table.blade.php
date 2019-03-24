@@ -51,13 +51,13 @@
                     {!! substr($rig->miner, 0, 2) !!}</a></td>
             <td>{!! $rig->driver !!}</td>
             <td>{!! $rig->kernel !!}</td>
-            <td>{!! $rig->state->cpu_temp !!}</td>
-            <td>{!! $rig::timeForHuman($rig->state->uptime) !!}</td>
-            <td>{!! $rig::timeForHuman($rig->state->miner_secs) !!}</td>
-            <td>{!! $rig->state->freespace !!}</td>
-            <td>{!! $rig->state->hash !!}</td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'cpu_temp']) }}">{!! $rig->state->cpu_temp !!}</a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'uptime']) }}">{!! $rig::timeForHuman($rig->state->uptime) !!}</a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_secs']) }}">{!! $rig::timeForHuman($rig->state->miner_secs) !!}</a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'freespace']) }}">{!! $rig->state->freespace !!}</a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'hash']) }}">{!! $rig->state->hash !!}</a></td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_hashes']) }}">{!! is_array($rig->state->miner_hashes) ? implode('|',$rig->state->miner_hashes) : '' !!}</td>
-            <td>{!! is_array($rig->state->temp) ? implode('|', $rig->state->temp) : '' !!}</td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'temp']) }}">{!! is_array($rig->state->temp) ? implode('|', $rig->state->temp) : '' !!}</a></td>
             <td>
                 {!! Form::open(['route' => ['cabinet.rigs.destroy', $rig->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
