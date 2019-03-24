@@ -38,7 +38,7 @@ class ChartController extends Controller
         $datasets = [];
 
         foreach($stats as $item) {
-            if(is_array($item[$field])) {
+            if(isset($item[$field]) && is_array($item[$field])) {
                 foreach ($item[$field] as $key => $value) {
 
                     $datasets[$key]['data'][] = [
@@ -51,7 +51,7 @@ class ChartController extends Controller
             else {
                 $datasets[0]['data'][] = [
                     (int) round(strtotime($item['created_at']) * 1000),
-                    $item[$field]
+                    (isset($item[$field])) ? $item[$field] : 0
                 ];
                 $datasets[0]['label'] = ucfirst($field);
             }
