@@ -9,6 +9,6 @@ class BaseModel extends Model
 {
     public static function timeForHuman($seconds)
     {
-        return CarbonInterval::seconds(intval($seconds))->cascade()->spec();
+        return CarbonInterval::seconds(intval($seconds))->cascade()->forHumans(['parts'=>1]);
     }
 }

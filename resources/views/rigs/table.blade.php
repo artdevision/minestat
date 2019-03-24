@@ -32,6 +32,10 @@
     </thead>
     <tbody>
     @foreach($rigs as $rig)
+        @php
+        $temp_class = $rig->state->cpu_temp < 45 ? 'bg-green' : 'bg-red';
+
+        @endphp
         <tr>
             <td><i class="fa fa-fw fa-power-off {!! $rig->online ? 'text-green' : 'text-red' !!}"></i></td>
             <td>{!! $rig->version !!}</td>
@@ -51,13 +55,33 @@
                     {!! substr($rig->miner, 0, 2) !!}</a></td>
             <td>{!! $rig->driver !!}</td>
             <td>{!! $rig->kernel !!}</td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'cpu_temp']) }}">{!! $rig->state->cpu_temp !!}</a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'cpu_temp']) }}">
+                    <small class="label {!! $temp_class !!}">
+                        {!! $rig->state->cpu_temp !!}
+                    </small>
+                </a>
+            </td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'uptime']) }}">{!! $rig::timeForHuman($rig->state->uptime) !!}</a></td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_secs']) }}">{!! $rig::timeForHuman($rig->state->miner_secs) !!}</a></td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'freespace']) }}">{!! $rig->state->freespace !!}</a></td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'hash']) }}">{!! $rig->state->hash !!}</a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_hashes']) }}">{!! is_array($rig->state->miner_hashes) ? implode('|',$rig->state->miner_hashes) : '' !!}</td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'temp']) }}">{!! is_array($rig->state->temp) ? implode('|', $rig->state->temp) : '' !!}</a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_hashes']) }}">
+                @if(is_array($rig->state->miner_hashes))
+                    @foreach($rig->state->miner_hashes as $val)
+                            <small class="label bg-green">{!! $val !!}</small>
+                    @endforeach
+                @endif
+                </a>
+            </td>
+            <td>
+                <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'temp']) }}">
+                    @if(is_array($rig->state->temp))
+                        @foreach($rig->state->temp as $val)
+                            <small class="label {{ color_gpu($val) }}">{!! $val !!}</small>
+                        @endforeach
+                    @endif
+                </a>
+            </td>
             <td>
                 {!! Form::open(['route' => ['cabinet.rigs.destroy', $rig->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
