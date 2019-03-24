@@ -56,7 +56,7 @@
             <td>{!! $rig::timeForHuman($rig->state->miner_secs) !!}</td>
             <td>{!! $rig->state->freespace !!}</td>
             <td>{!! $rig->state->hash !!}</td>
-            <td>{!! is_array($rig->state->temp) ? implode('|',$rig->state->miner_hashes) : '' !!}</td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_hashes']) }}">{!! is_array($rig->state->miner_hashes) ? implode('|',$rig->state->miner_hashes) : '' !!}</td>
             <td>{!! is_array($rig->state->temp) ? implode('|', $rig->state->temp) : '' !!}</td>
             <td>
                 {!! Form::open(['route' => ['cabinet.rigs.destroy', $rig->id], 'method' => 'delete']) !!}

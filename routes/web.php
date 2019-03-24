@@ -22,5 +22,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix'=>'cabinet', 'namespace' => 'Cabinet'], function() {
     Route::get('/', ['as' => 'cabinet.rigs', 'uses' => 'RigController@rigs']);
+    Route::get('chart/{id}/{field}', ['as' => 'cabinet.chart', 'uses' => 'ChartController@index']);
+    Route::get('chart/dataset/{id}/{field}', ['as' => 'cabinet.chart.dataset', 'uses' => 'ChartController@dataset']);
     Route::delete('rig/destroy/{id}', ['as' => 'cabinet.rigs.destroy', 'uses' => 'RigController@destroy']);
 });
