@@ -61,14 +61,14 @@
                     </small>
                 </a>
             </td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'uptime']) }}">{!! $rig::timeForHuman($rig->state->uptime) !!}</a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_secs']) }}">{!! $rig::timeForHuman($rig->state->miner_secs) !!}</a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'freespace']) }}">{!! $rig->state->freespace !!}</a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'hash']) }}">{!! $rig->state->hash !!}</a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'uptime']) }}"><small>{!! $rig::timeForHuman($rig->state->uptime) !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_secs']) }}"><small>{!! $rig::timeForHuman($rig->state->miner_secs) !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'freespace']) }}"><small>{!! $rig->state->freespace !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'hash']) }}"><small>{!! $rig->state->hash !!}</small></a></td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_hashes']) }}">
                 @if(is_array($rig->state->miner_hashes))
                     @foreach($rig->state->miner_hashes as $val)
-                            <small class="label bg-green">{!! $val !!}</small>
+                            <small class="text-green">{!! $val !!}</small>
                     @endforeach
                 @endif
                 </a>
