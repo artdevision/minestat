@@ -9,9 +9,8 @@
             <th><a href="?sort[hostname]={!! (!is_null($sort) &&  isset($sort['hostname']) && $sort['hostname'] == 'asc') ? 'desc' : 'asc' !!}">Name</a></th>
             <th><a href="?sort[rack_loc]={!! (!is_null($sort) &&  isset($sort['rack_loc']) && $sort['rack_loc'] == 'asc') ? 'desc' : 'asc' !!}">Loc</a></th>
             <th>IP</th>
-            <th>M</th>
+            <th><a href="?sort[miner]={!! (!is_null($sort) &&  isset($sort['miner']) && $sort['miner'] == 'asc') ? 'desc' : 'asc' !!}">M</a></th>
             <th><a href="?sort[driver]={!! (!is_null($sort) &&  isset($sort['driver']) && $sort['driver'] == 'asc') ? 'desc' : 'asc' !!}">Driver</a></th>
-            <th>Kernel</th>
 
             <th>CPU t</th>
             <th><a href="#"
@@ -62,7 +61,6 @@
                    data-original-title="{!! $rig->miner !!}">
                     {!! substr($rig->miner, 0, 2) !!}</a></td>
             <td>{!! $rig->driver !!}</td>
-            <td>{!! $rig->kernel !!}</td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'cpu_temp']) }}">
                     <small class="label {!! $temp_class !!}">
                         {!! $rig->state->cpu_temp !!}
