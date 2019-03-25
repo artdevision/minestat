@@ -65,14 +65,15 @@ abstract class BaseRepository
      * Paginate records for scaffold.
      *
      * @param int $perPage
+     * @param array $sort
      * @param array $columns
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function paginate($perPage, $columns = ['*'])
+    public function paginate($perPage, $sort = ['rack_loc' => 'asc'], $columns = ['*'])
     {
         $query = $this->allQuery();
 
-        $query->orderBy('rack_loc', 'asc');
+        $query->orderBy(key($sort), current($sort));
 
         return $query->paginate($perPage, $columns);
     }

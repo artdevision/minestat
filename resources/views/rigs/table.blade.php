@@ -1,13 +1,16 @@
+@php
+    $sort = request()->has('sort') ? request()->get('sort') : null;
+@endphp
 <table class="table table-responsive" id="rigs-table">
     <thead>
         <tr>
-            <th>On</th>
+            <th><a href="?sort[updated_at]={!! (!is_null($sort) &&  isset($sort['updated_at']) && $sort['updated_at'] == 'asc') ? 'desc' : 'asc' !!}">On</a></th>
             <th>V</th>
-            <th>Name</th>
-            <th>Loc</th>
+            <th><a href="?sort[hostname]={!! (!is_null($sort) &&  isset($sort['hostname']) && $sort['hostname'] == 'asc') ? 'desc' : 'asc' !!}">Name</a></th>
+            <th><a href="?sort[rack_loc]={!! (!is_null($sort) &&  isset($sort['rack_loc']) && $sort['rack_loc'] == 'asc') ? 'desc' : 'asc' !!}">Loc</a></th>
             <th>IP</th>
             <th>M</th>
-            <th>Driver</th>
+            <th><a href="?sort[driver]={!! (!is_null($sort) &&  isset($sort['driver']) && $sort['driver'] == 'asc') ? 'desc' : 'asc' !!}">Driver</a></th>
             <th>Kernel</th>
 
             <th>CPU t</th>

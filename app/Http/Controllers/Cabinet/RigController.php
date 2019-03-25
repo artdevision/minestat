@@ -23,7 +23,7 @@ class RigController extends Controller
 
     public function rigs(Request $request)
     {
-        $rigs = $this->repository->paginate(100);
+        $rigs = $this->repository->paginate(100, $request->has('sort') ? $request->get('sort') : ['rack_loc' => 'asc']);
         return view('rigs.index')
             ->with('rigs', $rigs);
     }
