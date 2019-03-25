@@ -13,6 +13,10 @@ class ChartController extends Controller
     /** @var RigRepository */
     protected $repository;
 
+    /**
+     * ChartController constructor.
+     * @param RigRepository $repository
+     */
     public function __construct(RigRepository $repository)
     {
         $this->repository = $repository;
@@ -29,9 +33,11 @@ class ChartController extends Controller
     {
         /** @var Rig $rig */
         $rig = $this->repository->find($id);
+        $count = $rig->stats()->count();
         $stats = $rig
             ->stats()
             ->orderBy('created_at', 'asc')
+            ->offset($count - 1000)
             ->limit(1000)
             ->get(['created_at',$field])
             ->toArray();

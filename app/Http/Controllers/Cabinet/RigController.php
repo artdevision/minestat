@@ -23,7 +23,7 @@ class RigController extends Controller
 
     public function rigs(Request $request)
     {
-        $rigs = $this->repository->paginate(50);
+        $rigs = $this->repository->paginate(100);
         return view('rigs.index')
             ->with('rigs', $rigs);
     }
