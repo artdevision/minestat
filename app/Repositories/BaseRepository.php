@@ -72,6 +72,8 @@ abstract class BaseRepository
     {
         $query = $this->allQuery();
 
+        $query->orderBy('rack_loc', 'asc');
+
         return $query->paginate($perPage, $columns);
     }
 

@@ -27,6 +27,7 @@
             <th><a href="#" data-placement="right" data-tooltip="tooltip" data-toggle="tooltip" data-original-title="Total hashrate" >Hr</a></th>
             <th>Hashes</th>
             <th>Temps</th>
+            <th>Ptune</th>
             <th>Volts</th>
             <th>Watts</th>
             <th>Core</th>
@@ -82,6 +83,15 @@
                     @if(is_array($rig->state->temp))
                         @foreach($rig->state->temp as $val)
                             <small class="label {{ color_gpu($val) }}">{!! $val !!}</small>
+                        @endforeach
+                    @endif
+                </a>
+            </td>
+            <td>
+                <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'powertune']) }}">
+                    @if(is_array($rig->state->powertune))
+                        @foreach($rig->state->powertune as $val)
+                            <small class="text-green">{!! $val !!}</small>
                         @endforeach
                     @endif
                 </a>
