@@ -10,7 +10,7 @@
             <th><a href="?sort[rack_loc]={!! (!is_null($sort) &&  isset($sort['rack_loc']) && $sort['rack_loc'] == 'asc') ? 'desc' : 'asc' !!}">Loc</a></th>
             <th>IP</th>
             <th><a href="?sort[miner]={!! (!is_null($sort) &&  isset($sort['miner']) && $sort['miner'] == 'asc') ? 'desc' : 'asc' !!}">M</a></th>
-            <th><a href="?sort[driver]={!! (!is_null($sort) &&  isset($sort['driver']) && $sort['driver'] == 'asc') ? 'desc' : 'asc' !!}">Driver</a></th>
+            <th><a href="?sort[driver]={!! (!is_null($sort) &&  isset($sort['driver']) && $sort['   driver'] == 'asc') ? 'desc' : 'asc' !!}">Driver</a></th>
 
             <th>CPU t</th>
             <th><a href="#"

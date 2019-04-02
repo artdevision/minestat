@@ -50,6 +50,23 @@ services:
       - nginx_srv
       - php_srv
 
+  blackfire:
+    image: blackfire/blackfire
+    environment:
+      - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID}
+      - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN}
+      - BLACKFIRE_CLIENT_ID=${BLACKFIRE_CLIENT_ID}
+      - BLACKFIRE_CLIENT_TOKEN=${BLACKFIRE_CLIENT_TOKEN}
+      - BLACKFIRE_LOG_LEVEL=4
+    expose:
+      - "8707"
+    depends_on:
+      - nginx_srv
+      - php_srv
+      - mongodb_srv
+    networks:
+      - srv_local
+
   redis_srv:
     image: redis:4.0.5-alpine
     hostname: redis
