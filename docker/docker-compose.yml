@@ -49,6 +49,7 @@ services:
     depends_on:
       - nginx_srv
       - php_srv
+      - redis_srv
 
   blackfire:
     image: blackfire/blackfire
