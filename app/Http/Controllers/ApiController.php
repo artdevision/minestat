@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessStat;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Rig;
@@ -33,15 +34,9 @@ class ApiController extends Controller
             }
         }
 
-        /** @var Rig $rig */
-        $rig = Rig::updateOrCreate(['uuid' => $data['uuid']], $data);
+        ProcessStat::dispatch($data);
 
-        $data['uuid'] = $rig->getKey();
-
-        /** @var RigStat $stat */
-        $stat = RigStat::create($data);
-
-        return dd($data, $rig->getAttributes(), $stat->getAttributes());
+        return Response::create("success", 200);
     }
 
 }
