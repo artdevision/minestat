@@ -24,8 +24,3 @@ Route::group(['middleware' => 'guest'], function() {
     Route::get('pushstat', ['as' => 'procedure.apps', 'uses' => 'ApiController@pushStat']);
     Route::post('pushstat', ['as' => 'procedure.apps', 'uses' => 'ApiController@pushStat']);
 });
-
-
-Route::resource('rigs', 'RigAPIController');
-
-Route::resource('rigs', 'RigAPIController');
