@@ -66,7 +66,7 @@ class Rig extends BaseModel
         if (empty($state)) {
             return false;
         }
-        return boolval(Carbon::createFromTimeString($state->updated_at)->diffInMinutes() < 4);
+        return boolval(Carbon::createFromTimeString($state->updated_at)->diffInMinutes() < 6);
     }
 
     public function setGpusAttribute($value)
