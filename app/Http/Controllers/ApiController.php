@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ProcessStat;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Rig;
@@ -36,7 +37,7 @@ class ApiController extends Controller
 
         ProcessStat::dispatch($data);
 
-        return Response::create("success", 200);
+        return Response::create("Thank you for using ethOS :)", 200);
     }
 
 }
