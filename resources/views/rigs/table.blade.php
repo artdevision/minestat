@@ -40,7 +40,9 @@
     <tbody>
     @foreach($rigs as $rig)
         @php
-        $temp_class = $rig->state->cpu_temp < 45 ? 'bg-green' : 'bg-red';
+
+        $state = $rig->state;
+        $temp_class = $state->cpu_temp < 45 ? 'bg-green' : 'bg-red';
 
         @endphp
         <tr>
@@ -63,17 +65,17 @@
             <td>{!! $rig->driver !!}</td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'cpu_temp']) }}">
                     <small class="label {!! $temp_class !!}">
-                        {!! $rig->state->cpu_temp !!}
+                        {!! $state->cpu_temp !!}
                     </small>
                 </a>
             </td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'uptime']) }}"><small>{!! $rig::timeForHuman($rig->state->uptime) !!}</small></a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_secs']) }}"><small>{!! $rig::timeForHuman($rig->state->miner_secs) !!}</small></a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'freespace']) }}"><small>{!! $rig->state->freespace !!}</small></a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'hash']) }}"><small>{!! $rig->state->hash !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'uptime']) }}"><small>{!! $rig::timeForHuman($state->uptime) !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_secs']) }}"><small>{!! $rig::timeForHuman($state->miner_secs) !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'freespace']) }}"><small>{!! $state->freespace !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'hash']) }}"><small>{!! $state->hash !!}</small></a></td>
             <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_hashes']) }}">
-                @if(is_array($rig->state->miner_hashes))
-                    @foreach($rig->state->miner_hashes as $val)
+                @if(is_array($state->miner_hashes))
+                    @foreach($state->miner_hashes as $val)
                             <small class="text-green">{!! $val !!}</small>
                     @endforeach
                 @endif
@@ -81,8 +83,8 @@
             </td>
             <td>
                 <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'temp']) }}">
-                    @if(is_array($rig->state->temp))
-                        @foreach($rig->state->temp as $val)
+                    @if(is_array($state->temp))
+                        @foreach($state->temp as $val)
                             <small class="label {{ color_gpu($val) }}">{!! $val !!}</small>
                         @endforeach
                     @endif
@@ -90,8 +92,8 @@
             </td>
             <td>
                 <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'powertune']) }}">
-                    @if(is_array($rig->state->powertune))
-                        @foreach($rig->state->powertune as $val)
+                    @if(is_array($state->powertune))
+                        @foreach($state->powertune as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
                     @endif
@@ -99,8 +101,8 @@
             </td>
             <td>
                 <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'voltage']) }}">
-                    @if(is_array($rig->state->voltage))
-                        @foreach($rig->state->voltage as $val)
+                    @if(is_array($state->voltage))
+                        @foreach($state->voltage as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
                     @endif
@@ -111,13 +113,13 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Watts: {!! is_array($rig->state->default_watts) ? implode(' ', $rig->state->default_watts) : '' !!}
-                        Min Watts: {!! is_array($rig->state->wats_min) ? implode(' ', $rig->state->wats_min) : '' !!}
-                        Max Watts: {!! is_array($rig->state->wats_max) ? implode(' ', $rig->state->wats_max) : '' !!}
+                   data-original-title="Default Watts: {!! is_array($state->default_watts) ? implode(' ', $state->default_watts) : '' !!}
+                        Min Watts: {!! is_array($state->wats_min) ? implode(' ', $state->wats_min) : '' !!}
+                        Max Watts: {!! is_array($state->wats_max) ? implode(' ', $state->wats_max) : '' !!}
                        "
                 >
-                    @if(is_array($rig->state->watts))
-                        @foreach($rig->state->watts as $val)
+                    @if(is_array($state->watts))
+                        @foreach($state->watts as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
                     @endif
@@ -128,10 +130,10 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Core: {!! is_array($rig->state->default_core) ? implode('hz ', $rig->state->default_core) : '' !!}hz"
+                   data-original-title="Default Core: {!! is_array($state->default_core) ? implode('hz ', $state->default_core) : '' !!}hz"
                 >
-                    @if(is_array($rig->state->core))
-                        @foreach($rig->state->core as $val)
+                    @if(is_array($state->core))
+                        @foreach($state->core as $val)
                             <small class="text-green">{!! $val / 1000 !!}</small>
                         @endforeach
                     @endif
@@ -142,10 +144,10 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Core: {!! is_array($rig->state->default_mem) ? implode('hz ', $rig->state->default_mem) : '' !!}hz"
+                   data-original-title="Default Core: {!! is_array($state->default_mem) ? implode('hz ', $state->default_mem) : '' !!}hz"
                 >
-                    @if(is_array($rig->state->mem))
-                        @foreach($rig->state->mem as $val)
+                    @if(is_array($state->mem))
+                        @foreach($state->mem as $val)
                             <small class="text-green">{!! $val / 1000 !!}</small>
                         @endforeach
                     @endif
