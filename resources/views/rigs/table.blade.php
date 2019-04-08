@@ -43,6 +43,7 @@
 
         $state = $rig->state;
         $temp_class = $state->cpu_temp < 45 ? 'bg-green' : 'bg-red';
+        $key = $rig->getKey();
 
         @endphp
         <tr>
@@ -63,17 +64,17 @@
                    data-original-title="{!! $rig->miner !!}">
                     {!! substr($rig->miner, 0, 2) !!}</a></td>
             <td>{!! $rig->driver !!}</td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'cpu_temp']) }}">
+            <td><a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'cpu_temp']) }}">
                     <small class="label {!! $temp_class !!}">
                         {!! $state->cpu_temp !!}
                     </small>
                 </a>
             </td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'uptime']) }}"><small>{!! $rig::timeForHuman($state->uptime) !!}</small></a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_secs']) }}"><small>{!! $rig::timeForHuman($state->miner_secs) !!}</small></a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'freespace']) }}"><small>{!! $state->freespace !!}</small></a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'hash']) }}"><small>{!! $state->hash !!}</small></a></td>
-            <td><a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'miner_hashes']) }}">
+            <td><a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'uptime']) }}"><small>{!! $rig::timeForHuman($state->uptime) !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'miner_secs']) }}"><small>{!! $rig::timeForHuman($state->miner_secs) !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'freespace']) }}"><small>{!! $state->freespace !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'hash']) }}"><small>{!! $state->hash !!}</small></a></td>
+            <td><a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'miner_hashes']) }}">
                 @if(is_array($state->miner_hashes))
                     @foreach($state->miner_hashes as $val)
                             <small class="text-green">{!! $val !!}</small>
@@ -82,7 +83,7 @@
                 </a>
             </td>
             <td>
-                <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'temp']) }}">
+                <a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'temp']) }}">
                     @if(is_array($state->temp))
                         @foreach($state->temp as $val)
                             <small class="label {{ color_gpu($val) }}">{!! $val !!}</small>
@@ -91,7 +92,7 @@
                 </a>
             </td>
             <td>
-                <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'powertune']) }}">
+                <a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'powertune']) }}">
                     @if(is_array($state->powertune))
                         @foreach($state->powertune as $val)
                             <small class="text-green">{!! $val !!}</small>
@@ -100,7 +101,7 @@
                 </a>
             </td>
             <td>
-                <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'voltage']) }}">
+                <a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'voltage']) }}">
                     @if(is_array($state->voltage))
                         @foreach($state->voltage as $val)
                             <small class="text-green">{!! $val !!}</small>
@@ -109,7 +110,7 @@
                 </a>
             </td>
             <td>
-                <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'watts']) }}"
+                <a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'watts']) }}"
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
@@ -126,7 +127,7 @@
                 </a>
             </td>
             <td>
-                <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'core']) }}"
+                <a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'core']) }}"
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
@@ -140,7 +141,7 @@
                 </a>
             </td>
             <td>
-                <a href="{{ route('cabinet.chart', ['id' => $rig->getKey(), 'field' => 'mem']) }}"
+                <a href="{{ route('cabinet.chart', ['id' => $key, 'field' => 'mem']) }}"
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
