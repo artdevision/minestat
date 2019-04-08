@@ -54,7 +54,7 @@ class Rig extends BaseModel
         if (is_null($this->state)) {
            $this->state = $this
                 ->stats()
-                ->orderBy('updated_at', 'desc')
+                ->orderBy('created_at', 'desc')
                 ->first();
         }
         return $this->state;
