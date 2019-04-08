@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['guest', 'throttle:50,1']], function() {
+Route::group(['middleware' => ['guest', 'throttle:10']], function() {
     Route::get('/', function() {
         return response()->json(['api' => 'v.1']);
     });
