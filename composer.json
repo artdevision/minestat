@@ -14,6 +14,7 @@
         "infyomlabs/laravel-generator": "5.8.x-dev",
         "jenssegers/mongodb": "^3.5",
         "laravel/framework": "5.8.*",
+        "laravel/horizon": "^3.1",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8.0",
         "predis/predis": "^1.1"

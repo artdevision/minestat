@@ -57,6 +57,7 @@ class Rig extends BaseModel
                 ->orderBy('created_at', 'desc')
                 ->limit(1)
                 ->first();
+
         }
         return $this->state;
     }
