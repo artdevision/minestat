@@ -55,6 +55,7 @@ class Rig extends BaseModel
            $this->state = $this
                 ->stats()
                 ->orderBy('created_at', 'desc')
+                ->limit(1)
                 ->first();
         }
         return $this->state;
