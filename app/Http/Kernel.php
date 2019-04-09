@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle.hosts:2,5',
+//            'throttle.hosts:2,5',
             'bindings',
             'guest'
         ],
