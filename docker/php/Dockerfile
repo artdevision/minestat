@@ -31,6 +31,7 @@ RUN apt-get install -y \
      php7.2-zip \
      php7.2-mongodb \
      php7.2-redis \
+     php7.2-memcached \
      curl \
      cron \
      supervisor \
