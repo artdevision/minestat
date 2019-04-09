@@ -108,7 +108,7 @@ class RigStat extends BaseModel
 
     public function setTempAttribute($value)
     {
-        $this->attributes['temp'] = $this->explodeAttribute($value);
+        $this->attributes['temp'] = (!is_array($value)) ? $this->explodeAttribute($value) : $value;
     }
 
     public function setMinerHashesAttribute($value)
@@ -188,10 +188,12 @@ class RigStat extends BaseModel
 
     private function explodeAttribute($value)
     {
-        $value = explode(' ', $value);
-        array_walk($value, function (&$item, $key) {
-            $item = floatval($item);
-        });
+        if(!is_array($value)) {
+            $value = explode(' ', $value);
+            array_walk($value, function (&$item, $key) {
+                $item = floatval($item);
+            });
+        }
         return $value;
     }
 }

@@ -59,12 +59,12 @@ class Rig extends BaseModel
     {
         if (is_null($this->_state)) {
 
-           $this->_state = (!is_array($this->attributes['state'])) ? $this
+           $this->_state = (!isset($this->attributes['state']) || !is_array($this->attributes['state'])) ? $this
                 ->stats()
                 ->orderBy('created_at', 'desc')
                 ->limit(1)
                 ->first() :
-               (new RigStat())->fill($this->attributes['state']);
+               (new RigStat())->fill($this->attributes['state'])->setAttribute('updated_at', $this->updated_at);
         }
         return $this->_state;
     }
