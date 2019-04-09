@@ -146,7 +146,7 @@ return [
                 'sleep' => 1,
                 'balance' => false,
                 'processes' => 2,
-                'tries' => 3,
+                'tries' => 1,
             ],
         ],
 
