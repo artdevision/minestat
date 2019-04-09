@@ -8,7 +8,7 @@ class Rig extends BaseModel
 {
     protected $collection = 'rigs';
 
-    protected $state = null;
+    protected $_state;
 
     protected $fillable = [
         'uuid',
@@ -41,7 +41,8 @@ class Rig extends BaseModel
         'models',
         'bioses',
         'meminfo',
-        'miner'
+        'miner',
+        'state',
     ];
 
     public function stats()
@@ -49,17 +50,23 @@ class Rig extends BaseModel
         return $this->hasMany(\App\RigStat::class, 'uuid', '_id');
     }
 
+    public function setStateAttribute($value)
+    {
+        $this->attributes['state'] = (new RigStat())->fill($value)->getAttributes();
+    }
+
     public function getStateAttribute()
     {
-        if (is_null($this->state)) {
-           $this->state = $this
+        if (is_null($this->_state)) {
+
+           $this->_state = (!is_array($this->attributes['state'])) ? $this
                 ->stats()
                 ->orderBy('created_at', 'desc')
                 ->limit(1)
-                ->first();
-
+                ->first() :
+               (new RigStat())->fill($this->attributes['state']);
         }
-        return $this->state;
+        return $this->_state;
     }
 
     public function getOnlineAttribute()

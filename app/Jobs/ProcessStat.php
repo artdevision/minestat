@@ -39,7 +39,9 @@ class ProcessStat implements ShouldQueue
     {
         $data = $this->data;
 
-            /** @var Rig $rig */
+        $data['state'] = $data;
+
+        /** @var Rig $rig */
         $rig = Rig::updateOrCreate(['uuid' => $data['uuid']], $data);
 
         $data['uuid'] = $rig->getKey();
