@@ -71,11 +71,12 @@ class Rig extends BaseModel
 
     public function getOnlineAttribute()
     {
-        $state = $this->getStateAttribute();
-        if (empty($state)) {
-            return false;
-        }
-        return boolval(Carbon::createFromTimeString($state->updated_at)->diffInMinutes() < 6);
+        return boolval(Carbon::createFromTimeString($this->updated_at)->diffInMinutes() <= 6);
+    }
+
+    public function getLastPingAttribute()
+    {
+        return self::timeForHuman(Carbon::createFromTimeString($this->updated_at)->diffInSeconds());
     }
 
     public function setGpusAttribute($value)
@@ -125,6 +126,7 @@ class Rig extends BaseModel
     {
         return array_merge(parent::toArray(), [
             'online' => $this->getOnlineAttribute(),
+            'last_ping' => $this->getLastPingAttribute(),
             'state' => $this->getStateAttribute()->toArray()
         ]);
     }

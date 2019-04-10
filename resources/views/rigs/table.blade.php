@@ -15,6 +15,12 @@
             <th><a href="?sort[driver]={!! (!is_null($sort) &&  isset($sort['driver']) && $sort['   driver'] == 'asc') ? 'desc' : 'asc' !!}">Driver</a></th>
 
             <th>CPU t</th>
+            <th><a href="?sort[updated_at]={!! (!is_null($sort) &&  isset($sort['updated_at']) && $sort['updated_at'] == 'asc') ? 'desc' : 'asc' !!}"
+                   data-placement="right"
+                   data-tooltip="tooltip"
+                   data-toggle="tooltip"
+                   data-original-title="Last Ping" >p</a>
+            </th>
             <th><a href="#"
                    data-placement="right"
                    data-tooltip="tooltip"
@@ -48,7 +54,7 @@
 
         @endphp
         <tr>
-            <td><i class="fa fa-fw fa-power-off {!! $rig['online'] ? 'text-green' : 'text-red' !!}"></i></td>
+            <td><i class="fa fa-fw {!! $rig['online'] ? 'fa-power-off text-green' : 'fa-close text-red' !!}"></i></td>
             <td>{!! $rig['version'] !!}</td>
             <td>{!! $rig['hostname'] !!}</td>
             <td>{!! $rig['rack_loc'] !!}</td>
@@ -71,6 +77,7 @@
                     </small>
                 </a>
             </td>
+            <td><a href="#"><small>{!! $rig['last_ping'] !!}</small></a></td>
             <td><a href="/cabinet/chart/{{ $key }}/uptime"><small>{!! $state['uptime'] !!}</small></a></td>
             <td><a href="/cabinet/chart/{{ $key }}/miner_secs"><small>{!! $state['miner_secs'] !!}</small></a></td>
             <td><a href="/cabinet/chart/{{ $key }}/freespace"><small>{!! $state['freespace'] !!}</small></a></td>
