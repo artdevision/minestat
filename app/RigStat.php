@@ -43,37 +43,6 @@ class RigStat extends BaseModel
         'powertune'
     ];
 
-    protected $visible = [
-        'uuid',
-        'defunct',
-        'uptime',
-        'off',
-        'overheat',
-        'rx_kbps',
-        'tx_kbps',
-        'load',
-        'cpu_temp',
-        'freespace',
-        'temp',
-        'miner_secs',
-        'fanrpm',
-        'fanpercent',
-        'hash',
-        'miner_hashes',
-        'default_core',
-        'default_mem',
-        'vramsize',
-        'core',
-        'mem',
-        'memstates',
-        'voltage',
-        'default_watts',
-        'watts',
-        'watt_min',
-        'watt_max',
-        'powertune'
-    ];
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
