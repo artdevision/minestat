@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
-composer install
+cp ./.env.example ./.env
 
-php artisan migrate
+cd docker
+
+cp ./.env.example ./.env
+
+docker-compose up -d
+
+docker-compose run php_srv /var/app/minestat/init.sh

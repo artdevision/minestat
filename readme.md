@@ -35,7 +35,9 @@ Passed testing and optimising on farm over 100 rigs with hi frequency requests f
 - Included `cron` task for reset outdated statistic.  
 - Redis queue service for consistent update incoming requests from rigs.
 
-### Coming soon
+###
+
+### TODO
 
 - Summary farm dashboard
 - Notification on critical rigs states
