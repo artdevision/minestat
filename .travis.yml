@@ -1,4 +1,4 @@
-languae: php
+language: php
 branches:
   only:
     - master
