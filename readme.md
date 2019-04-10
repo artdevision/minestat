@@ -35,14 +35,19 @@ Passed testing and optimising on farm over 100 rigs with hi frequency requests f
 - Included `cron` task for reset outdated statistic.  
 - Redis queue service for consistent update incoming requests from rigs.
 
-###
-
 ### TODO
 
 - Summary farm dashboard
 - Notification on critical rigs states
 - Users roles control
 - Remote configuration
+
+## Installation
+
+- Install `docker` following [instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+- Make and cd to app folder `mkdir /app/folder && cd /app/folder`
+- Clone project from GitHub `git clone https://github.com/artdevision/minestat.git ./`
+- Run installation script `sudo install.sh`
 
 ## EthOS setting up
 
