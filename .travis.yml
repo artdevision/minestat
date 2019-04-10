@@ -1,0 +1,4 @@
+languae: php
+branches:
+  only:
+    - master
