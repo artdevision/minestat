@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\RigRepository;
 use Flash;
+use Illuminate\Support\Facades\Cache;
 
 class RigController extends Controller
 {
@@ -23,7 +24,11 @@ class RigController extends Controller
 
     public function rigs(Request $request)
     {
-        $rigs = $this->repository->paginate(100, $request->has('sort') ? $request->get('sort') : ['rack_loc' => 'asc']);
+        $repository = $this->repository;
+        $sort = $request->get('sort', ['rack_loc' => 'asc']);
+        $rigs = Cache::remember('rigs-list-' . key($sort) . ':' . current($sort) , 120, function() use($repository, $request) {
+            return $repository->paginate(100, $request->get('sort', ['rack_loc' => 'asc']));
+        });
         return view('rigs.index')
             ->with('rigs', $rigs);
     }

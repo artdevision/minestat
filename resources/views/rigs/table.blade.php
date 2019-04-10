@@ -1,6 +1,10 @@
 @php
-    $sort = request()->has('sort') ? request()->get('sort') : null;
-    $rigs = $rigs->toArray();
+    use Illuminate\Support\Facades\Cache;
+    $sort = request()->get('sort', ['rack_loc' => 'asc']);
+    $rigs = Cache::remember('rig-list-serialized-' . key($sort) . ':' . current($sort) , 120, function () use($rigs) {
+        return $rigs->toArray();
+    });
+
     //dd($rigs['data'][0]['state']);
 @endphp
 <table class="table table-responsive" id="rigs-table">
