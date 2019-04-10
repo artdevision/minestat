@@ -1,6 +1,6 @@
 language: php
 env:
-  - DOCKER_COMPOSE_VERSION=1.4.2
+  - DOCKER_COMPOSE_VERSION=1.23.2
 branches:
   only:
     - master
