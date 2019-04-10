@@ -15,7 +15,8 @@ You can install it on your own server and it will be useful tool to control your
 
 Having charts almost for all indicators. 
 
-Includes all needed dependency and environment with `docker-compose` you can setup `docker-ce` and `docker-compose` and run application following setup instruction without any deployment skills.
+
+It includes all the necessary dependencies and environment with `docker-compose`, you can configure` docker-ce` and `docker-compose` and run the application, following the installation instructions, without any deployment skills.
 
 Passed testing and optimising on farm over 100 rigs with hi frequency requests from rigs on VDS with 2CPU and 2GB.
 
