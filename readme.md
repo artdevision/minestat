@@ -50,7 +50,7 @@ I can provide services for the installation and customisation of the application
 ## Donations
 
 I am developing a project in my spare time. If the project was useful to you, I will be grateful for the donations:
-
+- BTC: 1NzE3SNCrHGaUjMQxWGJaCMw1MqUUaWHSQ
 
 ## License
 
