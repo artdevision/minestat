@@ -43,10 +43,6 @@ Edit the web hook address manually. May be done vis SSH, direct from keyboard or
 - find the line like this `$hook = "http://ethosdistro.com/get.php";`
 - edit it to match `$hook = "http://{your_app_domain}/api/pushstat"` where `{your_app_domain}` is your server domain or IP;
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
 ## Integration and Customisation
 
 I can provide services for the installation and customisation of the application to your needs for. Of course not free :) [artdevision@gmail.com](mailto:artdevision@gmail.com)
