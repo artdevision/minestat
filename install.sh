@@ -8,4 +8,4 @@ cp ./.env.example ./.env
 
 docker-compose up -d
 
-docker-compose run php_srv /var/app/minestat/init.sh
+docker-compose run php_srv /var/www/html/init.sh
