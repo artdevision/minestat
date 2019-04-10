@@ -1,5 +1,7 @@
 @php
     $sort = request()->has('sort') ? request()->get('sort') : null;
+    $rigs = $rigs->toArray();
+    //dd($rigs['data'][0]['state']);
 @endphp
 <table class="table table-responsive" id="rigs-table">
     <thead>
@@ -38,45 +40,44 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($rigs as $rig)
+    @foreach($rigs['data'] as $rig)
         @php
-
-        $state = $rig->state;
-        $temp_class = $state->cpu_temp < 45 ? 'bg-green' : 'bg-red';
-        $key = $rig->getKey();
+        $state = $rig['state'];
+        $temp_class = (isset($state['cpu_temp']) && $state['cpu_temp'] < 45)  ? 'bg-green' : 'bg-red';
+        $key = $rig['_id'];
 
         @endphp
         <tr>
-            <td><i class="fa fa-fw fa-power-off {!! $rig->online ? 'text-green' : 'text-red' !!}"></i></td>
-            <td>{!! $rig->version !!}</td>
-            <td>{!! $rig->hostname !!}</td>
-            <td>{!! $rig->rack_loc !!}</td>
-            <td><a href="http://{!! $rig->ip !!}"
+            <td><i class="fa fa-fw fa-power-off {!! $rig['online'] ? 'text-green' : 'text-red' !!}"></i></td>
+            <td>{!! $rig['version'] !!}</td>
+            <td>{!! $rig['hostname'] !!}</td>
+            <td>{!! $rig['rack_loc'] !!}</td>
+            <td><a href="http://{!! $rig['ip'] !!}"
                    data-placement="right"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="{!! $rig->pool_info !!}">
-                    {!! $rig->ip !!}</a></td>
+                   data-original-title="{!! $rig['pool_info'] !!}">
+                    {!! $rig['ip'] !!}</a></td>
             <td><a href="#"
                    data-placement="right"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="{!! $rig->miner !!}">
-                    {!! substr($rig->miner, 0, 2) !!}</a></td>
-            <td>{!! $rig->driver !!}</td>
+                   data-original-title="{!! $rig['miner'] !!}">
+                    {!! substr($rig['miner'], 0, 2) !!}</a></td>
+            <td>{!! $rig['driver'] !!}</td>
             <td><a href="/cabinet/chart/{{ $key }}/cpu_temp">
                     <small class="label {!! $temp_class !!}">
-                        {!! $state->cpu_temp !!}
+                        {!! isset($state['cpu_temp']) ? $state['cpu_temp'] : ''!!}
                     </small>
                 </a>
             </td>
-            <td><a href="/cabinet/chart/{{ $key }}/uptime"><small>{!! $rig::timeForHuman($state->uptime) !!}</small></a></td>
-            <td><a href="/cabinet/chart/{{ $key }}/miner_secs"><small>{!! $rig::timeForHuman($state->miner_secs) !!}</small></a></td>
-            <td><a href="/cabinet/chart/{{ $key }}/freespace"><small>{!! $state->freespace !!}</small></a></td>
-            <td><a href="/cabinet/chart/{{ $key }}/hash"><small>{!! $state->hash !!}</small></a></td>
+            <td><a href="/cabinet/chart/{{ $key }}/uptime"><small>{!! $state['uptime'] !!}</small></a></td>
+            <td><a href="/cabinet/chart/{{ $key }}/miner_secs"><small>{!! $state['miner_secs'] !!}</small></a></td>
+            <td><a href="/cabinet/chart/{{ $key }}/freespace"><small>{!! $state['freespace'] !!}</small></a></td>
+            <td><a href="/cabinet/chart/{{ $key }}/hash"><small>{!! $state['hash'] !!}</small></a></td>
             <td><a href="/cabinet/chart/{{ $key }}/miner_hashes">
-                @if(is_array($state->miner_hashes))
-                    @foreach($state->miner_hashes as $val)
+                @if(is_array($state['miner_hashes']))
+                    @foreach($state['miner_hashes'] as $val)
                             <small class="text-green">{!! $val !!}</small>
                     @endforeach
                 @endif
@@ -84,8 +85,8 @@
             </td>
             <td>
                 <a href="/cabinet/chart/{{ $key }}/temp">
-                    @if(is_array($state->temp))
-                        @foreach($state->temp as $val)
+                    @if(is_array($state['temp']))
+                        @foreach($state['temp'] as $val)
                             <small class="label {{ color_gpu($val) }}">{!! $val !!}</small>
                         @endforeach
                     @endif
@@ -93,8 +94,8 @@
             </td>
             <td>
                 <a href="/cabinet/chart/{{ $key }}/powertune">
-                    @if(is_array($state->powertune))
-                        @foreach($state->powertune as $val)
+                    @if(is_array($state['powertune']))
+                        @foreach($state['powertune'] as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
                     @endif
@@ -102,8 +103,8 @@
             </td>
             <td>
                 <a href="/cabinet/chart/{{ $key }}/voltage">
-                    @if(is_array($state->voltage))
-                        @foreach($state->voltage as $val)
+                    @if(is_array($state['voltage']))
+                        @foreach($state['voltage'] as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
                     @endif
@@ -114,13 +115,13 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Watts: {!! is_array($state->default_watts) ? implode(' ', $state->default_watts) : '' !!}
-                        Min Watts: {!! is_array($state->wats_min) ? implode(' ', $state->wats_min) : '' !!}
-                        Max Watts: {!! is_array($state->wats_max) ? implode(' ', $state->wats_max) : '' !!}
+                   data-original-title="Default Watts: {!! is_array($state['default_watts']) ? implode(' ', $state['default_watts']) : '' !!}
+                        Min Watts: {!! is_array($state['watt_min']) ? implode(' ', $state['watt_min']) : '' !!}
+                        Max Watts: {!! is_array($state['watt_max']) ? implode(' ', $state['watt_max']) : '' !!}
                        "
                 >
-                    @if(is_array($state->watts))
-                        @foreach($state->watts as $val)
+                    @if(is_array($state['watts']))
+                        @foreach($state['watts'] as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
                     @endif
@@ -131,10 +132,10 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Core: {!! is_array($state->default_core) ? implode('hz ', $state->default_core) : '' !!}hz"
+                   data-original-title="Default Core: {!! is_array($state['default_core']) ? implode('hz ', $state['default_core']) : '' !!}hz"
                 >
-                    @if(is_array($state->core))
-                        @foreach($state->core as $val)
+                    @if(is_array($state['core']))
+                        @foreach($state['core'] as $val)
                             <small class="text-green">{!! $val / 1000 !!}</small>
                         @endforeach
                     @endif
@@ -145,17 +146,17 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Core: {!! is_array($state->default_mem) ? implode('hz ', $state->default_mem) : '' !!}hz"
+                   data-original-title="Default Core: {!! is_array($state['default_mem']) ? implode('hz ', $state['default_mem']) : '' !!}hz"
                 >
-                    @if(is_array($state->mem))
-                        @foreach($state->mem as $val)
+                    @if(is_array($state['mem']))
+                        @foreach($state['mem'] as $val)
                             <small class="text-green">{!! $val / 1000 !!}</small>
                         @endforeach
                     @endif
                 </a>
             </td>
             <td>
-                {!! Form::open(['route' => ['cabinet.rigs.destroy', $rig->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['cabinet.rigs.destroy', $key], 'method' => 'delete']) !!}
                 <div class='btn-group'>
                     {{--
                     <a href="{!! route('rigs.show', [$rig->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>

@@ -120,4 +120,12 @@ class Rig extends BaseModel
         $value = explode(PHP_EOL, $value);
         $this->attributes['meminfo'] = $value;
     }
+
+    public function toArray()
+    {
+        return array_merge(parent::toArray(), [
+            'online' => $this->getOnlineAttribute(),
+            'state' => $this->getStateAttribute()->toArray()
+        ]);
+    }
 }
