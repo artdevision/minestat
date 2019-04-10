@@ -19,6 +19,12 @@ Includes all needed dependency with `docker-compose` you can setup docker-ce and
 
 Passed testing and optimising on farm over 100 rigs with hi frequency requests from rigs on VDS with 2CPU and 2GB.
 
+### Screenshots
+
+![Rigs table](https://raw.githubusercontent.com/artdevision/minestat/master/public/img/screenshot.png)
+![Chart example](https://raw.githubusercontent.com/artdevision/minestat/master/public/img/chartscreen.png)
+
+
 ### Features
 - MongoDB data storage
 - Bootstrap admin panel
