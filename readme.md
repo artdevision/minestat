@@ -48,6 +48,9 @@ Passed testing and optimising on farm over 100 rigs with hi frequency requests f
 - Make and cd to app folder `mkdir /app/folder && cd /app/folder`
 - Clone project from GitHub `git clone https://github.com/artdevision/minestat.git ./`
 - Run installation script `sudo install.sh`
+- Create new user: run `cd docker && docker-compose run php_srv /bin/bash` and `php /var/www/html/artisan user:create email@domain.com` type password  and then `exit`
+- Done now stat panel is started - go to url `http://your.domain/cabinet`
+- Setting up the rigs to sent statistic.
 
 ## EthOS setting up
 
