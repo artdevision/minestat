@@ -7,11 +7,11 @@ services:
       args:
         - PHP_UPSTREAM_CONTAINER=${NGINX_PHP_UPSTREAM_CONTAINER}
         - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#    expose:
-#      - "9001"
+    ports:
+      - "80:80"
+      - "443:443"
+    expose:
+      - "9001"
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST}
     restart: always
@@ -21,7 +21,6 @@ services:
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
     networks:
       - srv_local
-      - nginx-proxy
 
   php_srv:
     build:
@@ -96,6 +95,3 @@ services:
 
 networks:
   srv_local:
-  nginx-proxy:
-    external:
-      name: nginx_proxy_nginx-proxy
