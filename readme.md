@@ -50,7 +50,6 @@ Passed testing and optimising on farm over 100 rigs with hi frequency requests f
 - Run installation script `sudo install.sh`
 - Create new user: run `cd docker && docker-compose run php_srv /bin/bash` and `php /var/www/html/artisan user:create email@domain.com` type password  and then `exit`
 - Done now stat panel is started - go to url `http://your.domain/cabinet`
-- Setting up the rigs to sent statistic.
 
 ## EthOS setting up
 
@@ -67,7 +66,9 @@ I can provide services for the installation and customisation of the application
 ## Donations
 
 I am developing a project in my spare time. If the project was useful to you, I will be grateful for the donations:
-- BTC: 1NzE3SNCrHGaUjMQxWGJaCMw1MqUUaWHSQ
+- BTC: `1NzE3SNCrHGaUjMQxWGJaCMw1MqUUaWHSQ`
+- PayPal ![PayPal](https://raw.githubusercontent.com/artdevision/minestat/master/public/img/QRPayPal.png)
+- [Yandex Money](https://money.yandex.ru/to/410014461718125/0) ![PayPal](https://raw.githubusercontent.com/artdevision/minestat/master/public/img/y_donate.jpg)
 
 ## License
 
