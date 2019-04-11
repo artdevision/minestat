@@ -67,8 +67,12 @@ I can provide services for the installation and customisation of the application
 
 I am developing a project in my spare time. If the project was useful to you, I will be grateful for the donations:
 - BTC: `1NzE3SNCrHGaUjMQxWGJaCMw1MqUUaWHSQ`
-- PayPal ![PayPal](https://raw.githubusercontent.com/artdevision/minestat/master/public/img/QRPayPal.png)
-- [Yandex Money](https://money.yandex.ru/to/410014461718125/0) ![PayPal](https://raw.githubusercontent.com/artdevision/minestat/master/public/img/y_donate.jpg)
+- PayPal 
+
+![PayPal](https://raw.githubusercontent.com/artdevision/minestat/master/public/img/QRPayPal.png)
+- [Yandex Money](https://money.yandex.ru/to/410014461718125/0) 
+
+![YandeMoney](https://raw.githubusercontent.com/artdevision/minestat/master/public/img/y_donate.jpg)
 
 ## License
 
