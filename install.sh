@@ -7,6 +7,8 @@ sudo mv docker-compose /usr/local/bin
 
 cp ./.env.example ./.env
 
+sudo chmod -R 777 storage
+
 cd docker
 
 cp ./.env.example ./.env
