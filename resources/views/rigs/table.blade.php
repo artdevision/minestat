@@ -52,36 +52,36 @@
     <tbody>
     @foreach($rigs['data'] as $rig)
         @php
-        $state = $rig['state'];
+        $state = isset($rig['state']) ? $rig['state'] : '';
         $temp_class = (isset($state['cpu_temp']) && $state['cpu_temp'] < 45)  ? 'bg-green' : 'bg-red';
         $key = $rig['_id'];
 
         @endphp
         <tr>
-            <td><i class="fa fa-fw {!! $rig['online'] ? 'fa-power-off text-green' : 'fa-close text-red' !!}"></i></td>
-            <td>{!! $rig['version'] !!}</td>
-            <td>{!! $rig['hostname'] !!}</td>
-            <td>{!! $rig['rack_loc'] !!}</td>
-            <td><a href="http://{!! $rig['ip'] !!}"
+            <td><i class="fa fa-fw {!! isset($rig['online']) && $rig['online'] ? 'fa-power-off text-green' : 'fa-close text-red' !!}"></i></td>
+            <td>{!! isset($rig['version']) ? $rig['version'] : '' !!}</td>
+            <td>{!! isset($rig['hostname']) ? $rig['hostname'] : '' !!}</td>
+            <td>{!! isset($rig['rack_loc']) ? $rig['rack_loc'] : '' !!}</td>
+            <td><a href="http://{!! isset($rig['ip']) ? $rig['ip'] : '' !!}"
                    data-placement="right"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="{!! $rig['pool_info'] !!}">
-                    {!! $rig['ip'] !!}</a></td>
+                   data-original-title="{!! isset($rig['pool_info']) ? $rig['pool_info'] : 'no info'!!}">
+                    {!! isset($rig['ip']) ? $rig['ip'] : 'no info' !!}</a></td>
             <td><a href="#"
                    data-placement="right"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="{!! $rig['miner'] !!}">
-                    {!! substr($rig['miner'], 0, 2) !!}</a></td>
-            <td>{!! $rig['driver'] !!}</td>
+                   data-original-title="{!! isset($rig['miner']) ? $rig['miner'] : ''!!}">
+                    {!! isset($rig['miner']) ? substr($rig['miner'], 0, 2) : '' !!}</a></td>
+            <td>{!! isset($rig['driver']) ? $rig['driver'] : '' !!}</td>
             <td><a href="/cabinet/chart/{{ $key }}/cpu_temp">
                     <small class="label {!! $temp_class !!}">
                         {!! isset($state['cpu_temp']) ? $state['cpu_temp'] : ''!!}
                     </small>
                 </a>
             </td>
-            <td><a href="#"><small>{!! $rig['last_ping'] !!}</small></a></td>
+            <td><a href="#"><small>{!! isset($rig['last_ping']) ? $rig['last_ping'] : '' !!}</small></a></td>
             <td><a href="/cabinet/chart/{{ $key }}/uptime"><small>{!! isset($state['uptime']) ? $state['uptime'] : 0 !!}</small></a></td>
             <td><a href="/cabinet/chart/{{ $key }}/miner_secs"><small>{!! isset($state['miner_secs']) ? $state['miner_secs'] : 0 !!}</small></a></td>
             <td><a href="/cabinet/chart/{{ $key }}/freespace"><small>{!! isset($state['freespace']) ? $state['freespace'] : 0 !!}</small></a></td>
