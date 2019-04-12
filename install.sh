@@ -11,4 +11,9 @@ cd docker
 
 cp ./.env.example ./.env
 
-docker-compose up -d && docker-compose run php_srv /var/www/html/init.sh
+sudo mkdir -p data/mongodb/mongodb
+sudo mkdir -p data/redis
+sudo chmod -R 777 data
+
+docker-compose up -d
+docker-compose logs && docker-compose run php_srv /var/www/html/init.sh
