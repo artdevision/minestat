@@ -82,12 +82,12 @@
                 </a>
             </td>
             <td><a href="#"><small>{!! $rig['last_ping'] !!}</small></a></td>
-            <td><a href="/cabinet/chart/{{ $key }}/uptime"><small>{!! $state['uptime'] !!}</small></a></td>
-            <td><a href="/cabinet/chart/{{ $key }}/miner_secs"><small>{!! $state['miner_secs'] !!}</small></a></td>
-            <td><a href="/cabinet/chart/{{ $key }}/freespace"><small>{!! $state['freespace'] !!}</small></a></td>
-            <td><a href="/cabinet/chart/{{ $key }}/hash"><small>{!! $state['hash'] !!}</small></a></td>
+            <td><a href="/cabinet/chart/{{ $key }}/uptime"><small>{!! isset($state['uptime']) ? $state['uptime'] : 0 !!}</small></a></td>
+            <td><a href="/cabinet/chart/{{ $key }}/miner_secs"><small>{!! isset($state['miner_secs']) ? $state['miner_secs'] : 0 !!}</small></a></td>
+            <td><a href="/cabinet/chart/{{ $key }}/freespace"><small>{!! isset($state['freespace']) ? $state['freespace'] : 0 !!}</small></a></td>
+            <td><a href="/cabinet/chart/{{ $key }}/hash"><small>{!! isset($state['hash']) ? $state['hash'] : 0 !!}</small></a></td>
             <td><a href="/cabinet/chart/{{ $key }}/miner_hashes">
-                @if(is_array($state['miner_hashes']))
+                @if(isset($state['miner_hashes']) && is_array($state['miner_hashes']))
                     @foreach($state['miner_hashes'] as $val)
                             <small class="text-green">{!! $val !!}</small>
                     @endforeach
@@ -96,7 +96,7 @@
             </td>
             <td>
                 <a href="/cabinet/chart/{{ $key }}/temp">
-                    @if(is_array($state['temp']))
+                    @if(isset($state['temp']) && is_array($state['temp']))
                         @foreach($state['temp'] as $val)
                             <small class="label {{ color_gpu($val) }}">{!! $val !!}</small>
                         @endforeach
@@ -105,7 +105,7 @@
             </td>
             <td>
                 <a href="/cabinet/chart/{{ $key }}/powertune">
-                    @if(is_array($state['powertune']))
+                    @if(isset($state['powertune']) && is_array($state['powertune']))
                         @foreach($state['powertune'] as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
@@ -114,7 +114,7 @@
             </td>
             <td>
                 <a href="/cabinet/chart/{{ $key }}/voltage">
-                    @if(is_array($state['voltage']))
+                    @if(isset($state['voltage']) && is_array($state['voltage']))
                         @foreach($state['voltage'] as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
@@ -131,7 +131,7 @@
                         Max Watts: {!! is_array($state['watt_max']) ? implode(' ', $state['watt_max']) : '' !!}
                        "
                 >
-                    @if(is_array($state['watts']))
+                    @if(isset($state['watts']) && is_array($state['watts']))
                         @foreach($state['watts'] as $val)
                             <small class="text-green">{!! $val !!}</small>
                         @endforeach
@@ -143,9 +143,9 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Core: {!! is_array($state['default_core']) ? implode('hz ', $state['default_core']) : '' !!}hz"
+                   data-original-title="Default Core: {!! isset($state['default_core']) && is_array($state['default_core']) ? implode('hz ', $state['default_core']) : '' !!}hz"
                 >
-                    @if(is_array($state['core']))
+                    @if(isset($state['core']) && is_array($state['core']))
                         @foreach($state['core'] as $val)
                             <small class="text-green">{!! $val / 1000 !!}</small>
                         @endforeach
@@ -157,9 +157,9 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Core: {!! is_array($state['default_mem']) ? implode('hz ', $state['default_mem']) : '' !!}hz"
+                   data-original-title="Default Core: {!! isset($state['default_mem']) && is_array($state['default_mem']) ? implode('hz ', $state['default_mem']) : '' !!}hz"
                 >
-                    @if(is_array($state['mem']))
+                    @if(isset($state['mem']) && is_array($state['mem']))
                         @foreach($state['mem'] as $val)
                             <small class="text-green">{!! $val / 1000 !!}</small>
                         @endforeach
