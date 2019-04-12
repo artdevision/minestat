@@ -83,8 +83,6 @@ services:
       - MONGODB_PASSWORD=${MONGODB_PASSWORD}
       - MONGODB_DATABASE=${MONGODB_DATABASE}
       - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
-    ports:
-      - "27017:27017"
     networks:
       - srv_local
     volumes:
