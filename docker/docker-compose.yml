@@ -12,8 +12,6 @@ services:
       - "443:443"
     expose:
       - "9001"
-    environment:
-      - VIRTUAL_HOST=${VIRTUAL_HOST}
     restart: always
     volumes:
       - ./../:/var/www/html
