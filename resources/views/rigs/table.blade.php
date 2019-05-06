@@ -4,8 +4,6 @@
     $rigs = Cache::remember('rig-list-serialized-' . key($sort) . ':' . current($sort) , 120, function () use($rigs) {
         return $rigs->toArray();
     });
-
-    //dd($rigs['data'][0]['state']);
 @endphp
 <table class="table table-responsive" id="rigs-table">
     <thead>
@@ -126,9 +124,9 @@
                    data-placement="left"
                    data-tooltip="tooltip"
                    data-toggle="tooltip"
-                   data-original-title="Default Watts: {!! is_array($state['default_watts']) ? implode(' ', $state['default_watts']) : '' !!}
-                        Min Watts: {!! is_array($state['watt_min']) ? implode(' ', $state['watt_min']) : '' !!}
-                        Max Watts: {!! is_array($state['watt_max']) ? implode(' ', $state['watt_max']) : '' !!}
+                   data-original-title="Default Watts: {!! (isset($state['default_watts']) && is_array($state['default_watts'])) ? implode(' ', $state['default_watts']) : '' !!}
+                        Min Watts: {!! (isset($state['watt_min']) && is_array($state['watt_min']))? implode(' ', $state['watt_min']) : '' !!}
+                        Max Watts: {!! (isset($state['watt_max']) && is_array($state['watt_max'])) ? implode(' ', $state['watt_max']) : '' !!}
                        "
                 >
                     @if(isset($state['watts']) && is_array($state['watts']))
