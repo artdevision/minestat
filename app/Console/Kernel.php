@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('stat:clear')
-                  ->daily();
+                  ->weeklyOn(6, '00:01');
     }
 
     /**
