@@ -24,6 +24,9 @@ RUN echo "upstream php-upstream { server ${PHP_UPSTREAM_CONTAINER}:${PHP_UPSTREA
     && rm /etc/nginx/conf.d/default.conf
 
 ADD ./startup.sh /opt/startup.sh
+
+USER www-data:www-data
+
 RUN sed -i 's/\r//g' /opt/startup.sh
 #RUN chown -R www-data:www-data /var/www/html
 CMD ["/bin/bash", "/opt/startup.sh"]
